@@ -1,39 +1,16 @@
-package in.ashokit.entity;
-
-import jakarta.persistence.*;
+package in.ashokit.binding;
 
 import java.time.LocalDate;
-import java.util.List;
 
-@Entity
-@Table(name="IES_USERS")
-public class UserEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    private Long userId;
+public class UserAccForm {
     private String fullName;
     private String email;
-    private String pwd;
     private Long mobileNo;
     private String gender;
     private LocalDate dob;
     private Long ssn;
-    private String accStatus;
     private String activeSw;
-
     private Integer roleId;
-
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    private List<PlanEntity> plans;
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
 
     public String getFullName() {
         return fullName;
@@ -49,14 +26,6 @@ public class UserEntity {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPwd() {
-        return pwd;
-    }
-
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
     }
 
     public Long getMobileNo() {
@@ -91,14 +60,6 @@ public class UserEntity {
         this.ssn = ssn;
     }
 
-    public String getAccStatus() {
-        return accStatus;
-    }
-
-    public void setAccStatus(String accStatus) {
-        this.accStatus = accStatus;
-    }
-
     public String getActiveSw() {
         return activeSw;
     }
@@ -107,19 +68,11 @@ public class UserEntity {
         this.activeSw = activeSw;
     }
 
-    public List<PlanEntity> getPlans() {
-        return plans;
-    }
-
     public Integer getRoleId() {
         return roleId;
     }
 
     public void setRoleId(Integer roleId) {
         this.roleId = roleId;
-    }
-
-    public void setPlans(List<PlanEntity> plans) {
-        this.plans = plans;
     }
 }

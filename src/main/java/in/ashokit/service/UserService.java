@@ -3,6 +3,7 @@ package in.ashokit.service;
 import in.ashokit.binding.DashboardCard;
 import in.ashokit.binding.LoginForm;
 import in.ashokit.binding.UnlockAccForm;
+import in.ashokit.binding.UserAccForm;
 
 public interface UserService {
     //if we need to return only 2 conditions then take return types as boolean,
@@ -13,7 +14,7 @@ public interface UserService {
 
     public DashboardCard fetchDashboardInfo();
 
-    public String unlockUserAccount(UnlockAccForm unlockAccForm);
+    public UserAccForm getUserByEmail(String email);
 
 
 }

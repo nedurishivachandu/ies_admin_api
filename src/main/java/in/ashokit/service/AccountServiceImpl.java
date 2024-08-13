@@ -9,10 +9,14 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Stream;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -32,9 +36,24 @@ public class AccountServiceImpl implements AccountService {
         entity.setActiveSw("Y");
         userRepo.save(entity);
         // send email
-        String subject="";
-        String body="";
+        String subject="User Registration";
+        String body = readEmailBody("REG_EMAIL_BODY.txt", entity);
         return emailUtils.sendEmail(subject, body, entity.getEmail());
+    }
+
+    private String readEmailBody(String fileName, UserEntity user) {
+    StringBuilder sb=new StringBuilder();
+    try (Stream<String> lines = Files.lines(Paths.get(fileName))) {
+        lines.forEach( line -> {
+            line = line.replace("${FNAME}", user.getFullName());
+            line = line.replace("${TEMP_PWD}", user.getPwd());
+            line = line.replace("${EMAIL}", user.getEmail());
+            sb.append(lines);
+    });
+    }catch (Exception e){
+        e.printStackTrace();
+    }
+    return sb.toString();
     }
 
     @Override

@@ -3,12 +3,14 @@ package in.ashokit.service;
 import in.ashokit.binding.DashboardCard;
 import in.ashokit.binding.LoginForm;
 import in.ashokit.binding.UnlockAccForm;
+import in.ashokit.binding.UserAccForm;
 import in.ashokit.entity.EligEntity;
 import in.ashokit.entity.UserEntity;
 import in.ashokit.repository.EligRepo;
 import in.ashokit.repository.PlanRepo;
 import in.ashokit.repository.UserRepo;
 import in.ashokit.utils.EmailUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -73,7 +75,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public String unlockUserAccount(UnlockAccForm unlockAccForm) {
-        return null;
+    public UserAccForm getUserByEmail(String email) {
+        UserEntity userEntity = userRepo.findByEmail(email);
+        UserAccForm user=new UserAccForm();
+        BeanUtils.copyProperties(userEntity,user);
+        return user;
     }
+
 }

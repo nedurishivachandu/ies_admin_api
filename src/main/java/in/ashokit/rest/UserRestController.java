@@ -20,7 +20,7 @@ public class UserRestController {
     @PostMapping("/login")
     public String login(@RequestBody LoginForm loginForm){
         String status = userService.login(loginForm);
-        if(status.equals("Success")){
+        if(status.equals("success")){
             return "redirect:/dashboard?email="+loginForm.getEmail();
         }else{
             return status;

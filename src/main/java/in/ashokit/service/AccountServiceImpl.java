@@ -2,6 +2,7 @@ package in.ashokit.service;
 
 import in.ashokit.binding.UnlockAccForm;
 import in.ashokit.binding.UserAccForm;
+import in.ashokit.constants.AppConstants;
 import in.ashokit.entity.UserEntity;
 import in.ashokit.repository.UserRepo;
 import in.ashokit.utils.EmailUtils;
@@ -45,9 +46,9 @@ public class AccountServiceImpl implements AccountService {
     StringBuilder sb=new StringBuilder();
     try (Stream<String> lines = Files.lines(Paths.get(fileName))) {
         lines.forEach( line -> {
-            line = line.replace("${FNAME}", user.getFullName());
-            line = line.replace("${TEMP_PWD}", user.getPwd());
-            line = line.replace("${EMAIL}", user.getEmail());
+            line = line.replace(AppConstants.FNAME, user.getFullName());
+            line = line.replace(AppConstants.PWD, user.getPwd());
+            line = line.replace(AppConstants.EMAIL, user.getEmail());
             sb.append(lines);
     });
     }catch (Exception e){
